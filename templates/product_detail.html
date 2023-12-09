@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Product Detail
+{% endblock %}
+
+{% block main %}
+<div class="product-detail">
+    <h2>{{ product.name }}</h2>
+    <img src="{{ product.image }}" alt="{{ product.name }}">
+    <p>{{ product.description }}</p>
+    <p>Price: {{ product.price }}</p>
+    <button>Add to Cart</button>
+</div>
+{% endblock %}

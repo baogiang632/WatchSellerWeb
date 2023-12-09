@@ -285,6 +285,14 @@ def facesetup():
     else:
         return render_template("face.html")
 
+# @app.route("/product/<int:product_id>")
+# @login_required
+# def product_detail(product_id):
+#     # Get the product data from the database using the product_id
+#     product = db.execute("SELECT * FROM products WHERE id = ?", product_id)
+
+#     # Pass the product data to the template
+#     return render_template("product_detail.html", product=product)
 
 def errorhandler(e):
     """Handle error"""
