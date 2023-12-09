@@ -93,7 +93,10 @@
 
             <center>
 
-                {% block main %}{% endblock %}
+                {% block main %}
+                
+                
+                {% endblock %}
 
                 <!-- jQuery CDN - Slim version (=without AJAX) -->
                 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -133,6 +136,13 @@
 
                 <!-- Add to card feature -->
                 <script src="js/main.js"></script>
+                {% block show_footer %}
+                    {% if show_footer is not defined or show_footer %}
+                        <footer class="footer">
+                            <!-- Footer content -->
+                        </footer>
+                    {% endif %}
+                {% endblock %}
 
                 <!-- Add more footer content here -->
                 <footer class="footer">
