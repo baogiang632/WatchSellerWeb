@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Add to Cart
+{% endblock %}
+
+{% block main %}
+<div class="add-to-cart">
+    <h2>{{ product.name }}</h2>
+    <img src="{{ url_for('static', filename=product.image) }}" alt="{{ product.name }}">
+    <p>{{ product.description }}</p>
+    <p>Price: {{ product.price }}</p>
+    <form action="{{ url_for('add_to_cart', product_id=product.id) }}" method="post">
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" min="1" max="100">
+        <input type="submit" value="Add to Cart">
+    </form>
+</div>
+{% endblock %}

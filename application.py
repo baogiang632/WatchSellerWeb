@@ -24,11 +24,12 @@ import face_recognition
 from PIL import Image
 from base64 import b64encode, b64decode
 import re
-
 from helpers import apology, login_required
-
 import requests
 from bs4 import BeautifulSoup
+from flask import abort
+
+products = []
 
 # Configure application
 app = Flask(__name__)
@@ -63,7 +64,8 @@ db = SQL("sqlite:///data.db")
 @app.route("/")
 @login_required
 def home():
-    return redirect("/home")
+    # Pass a variable 'is_home' to the template
+    return render_template('layout.html', is_home=True)
 
 
 @app.route("/home")
@@ -72,14 +74,28 @@ def index():
     # return render_template("index.html")
     # Get the product data. This could come from a database, an API, etc.
     products = [
-    {"name": "ELIO Nắng Xuân 40 mm Unisex", "description": "Đồng hồ ELIO Nắng Xuân 40 mm Unisex EL032-01", "price": "219.000", "image": "/static/images/product_1.jpg"},
-    {"name": "ELIO Nàng Thơ 40 mm Unisex", "description": "Đồng hồ ELIO Nàng Thơ 40 mm Unisex EL030-01 ", "price": "219.000", "image": "/static/images/product_2.jpg"},
-    # Add more products as needed
+    {"id": 1, "name": "ELIO Nắng Xuân 40 mm Unisex", "description": "Đồng hồ ELIO Nắng Xuân 40 mm Unisex EL032-01", "price": "219.000đ", "image": "static/images/product_1.jpg"},
+    {"id": 2, "name": "ELIO Nàng Thơ 40 mm Unisex", "description": "Đồng hồ ELIO Nàng Thơ 40 mm Unisex EL030-01 ", "price": "219.000đ", "image": "static/images/product_2.jpg"},
+    
 ]
 
     # Pass the product data to the template
     return render_template("layout.html", products=products)
 
+@app.route("/add_to_cart/<int:product_id>", methods=["GET", "POST"])
+@login_required
+def add_to_cart(product_id):
+    # Find the product with the given id
+    product = next((product for product in products if product["id"] == product_id), None)
+    if product is None:
+        abort(404)  # If no product with the given id was found, return a 404 error
+    # Pass the product to the template
+    return render_template("add_to_cart.html", product=product)
+
+@app.route('/add_to_cart')
+def shopping_cart():
+    # Your code here
+    return render_template('shopping_cart.html')
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -117,7 +133,7 @@ def login():
         session["user_id"] = username[0]["id"]
 
         # Redirect user to home page
-        return redirect("/")
+        return redirect("/home")
 
     # User reached route via GET (as by clicking a link or via redirect)
     else:
@@ -132,7 +148,7 @@ def logout():
     session.clear()
 
     # Redirect user to login form
-    return redirect("/")
+    return redirect("/login")
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -189,7 +205,7 @@ def register():
             flash(f"Registered as {input_username}")
 
             # Redirect user to homepage
-            return redirect("/")
+            return redirect("/home")
 
     # User reached route via GET (as by clicking a link or via redirect)
     else:

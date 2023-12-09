@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Shopping Cart
+{% endblock %}
+
+{% block main %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shopping Cart</title>
+    <!-- Add your CSS links here -->
+</head>
+<body>
+    <h1>Shopping Cart</h1>
+    <div id="cart">
+        <!-- Each cart item will be represented with a div like this -->
+        <div class="cart-item">
+            <img src="product-image.jpg" alt="Product Image">
+            <h2>Product Title</h2>
+            <p>Price: $<span class="price">100</span></p>
+            <p>Quantity: <span class="quantity">1</span></p>
+            <p>Size: <span class="size">M</span></p>
+            <button>Edit</button>
+            <button>Remove</button>
+        </div>
+    </div>
+    <a href="/continue-shopping">Continue Shopping</a>
+    <div id="promo-code">
+        <label for="promo">Promo Code:</label>
+        <input type="text" id="promo" name="promo">
+        <button>Apply</button>
+    </div>
+    <div id="payment-methods">
+        <!-- Add your payment methods here -->
+    </div>
+    <div id="security">
+        <!-- Add your security messaging and logos here -->
+    </div>
+    <div id="offers">
+        <!-- Highlight your offers here -->
+    </div>
+    <div id="contact">
+        <!-- Add your contact details here -->
+    </div>
+    <div id="help">
+        <!-- Add your help options here -->
+    </div>
+    <div id="delivery-returns">
+        <!-- Add your delivery and returns information here -->
+    </div>
+    <a href="/checkout">Proceed to Checkout</a>
+</body>
+</html>
+{% endblock %}

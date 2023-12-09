@@ -13,8 +13,8 @@ index
             <h3>{{ product.name }}</h3>
             <p>{{ product.description }}</p>
             <p>Price: {{ product.price }}</p>
-            <img src="{{ product.image }}" alt="{{ product.name }}">
-            <button>Add to Cart</button>
+            <img src="{{ url_for('static', filename=product.image) }}" alt="{{ product.name }}">
+            <button><a href="{{ url_for('add_to_cart', product_id=product.id) }}">Add to Cart</a></button>
         </div>
         {% endfor %}
     </div>
