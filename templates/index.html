@@ -4,8 +4,20 @@
 index
 {% endblock %}
 {% block main %}
-<body> 
- <h1>Login success</h1>
+
+<body>
+    <h1>Login success</h1>
+    <div class="product-grid">
+        {% for product in products %}
+        <div class="product">
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.description }}</p>
+            <p>Price: {{ product.price }}</p>
+            <img src="{{ product.image }}" alt="{{ product.name }}">
+            <button>Add to Cart</button>
+        </div>
+        {% endfor %}
+    </div>
 </body>
 
 </html>

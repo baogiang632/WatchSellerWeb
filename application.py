@@ -27,6 +27,9 @@ import re
 
 from helpers import apology, login_required
 
+import requests
+from bs4 import BeautifulSoup
+
 # Configure application
 app = Flask(__name__)
 # configure flask-socketio
@@ -66,7 +69,16 @@ def home():
 @app.route("/home")
 @login_required
 def index():
-    return render_template("index.html")
+    # return render_template("index.html")
+    # Get the product data. This could come from a database, an API, etc.
+    products = [
+    {"name": "ELIO Nắng Xuân 40 mm Unisex", "description": "Đồng hồ ELIO Nắng Xuân 40 mm Unisex EL032-01", "price": "219.000", "image": "/static/images/product_1.jpg"},
+    {"name": "ELIO Nàng Thơ 40 mm Unisex", "description": "Đồng hồ ELIO Nàng Thơ 40 mm Unisex EL030-01 ", "price": "219.000", "image": "/static/images/product_2.jpg"},
+    # Add more products as needed
+]
+
+    # Pass the product data to the template
+    return render_template("layout.html", products=products)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -286,4 +298,4 @@ for code in default_exceptions:
     app.errorhandler(code)(errorhandler)
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
