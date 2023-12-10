@@ -208,6 +208,17 @@ a.article:hover {
   color: #fff !important;
 }
 
+.main-logo {
+  position: absolute;
+  top: 0;
+  left: 87%;
+  transform: translate(-50%, 0) scale(0.3);
+  text-align: center;
+  margin-top: 0;
+  outline: 10px !important;
+  border: none;
+}
+
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
@@ -223,7 +234,7 @@ a.article:hover {
 
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
   }
   .product-image {

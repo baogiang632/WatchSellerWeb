@@ -74,8 +74,12 @@ def index():
     # return render_template("index.html")
     # Get the product data. This could come from a database, an API, etc.
     products = [
-    {"id": 1, "name": "ELIO Nắng Xuân 40 mm Unisex", "description": "Đồng hồ ELIO Nắng Xuân 40 mm Unisex EL032-01", "price": "219.000đ", "image": "static/images/product_1.jpg"},
-    {"id": 2, "name": "ELIO Nàng Thơ 40 mm Unisex", "description": "Đồng hồ ELIO Nàng Thơ 40 mm Unisex EL030-01 ", "price": "219.000đ", "image": "static/images/product_2.jpg"},
+    {"id": 1, "name": "ELIO Nắng Xuân Unisex", "description": "Đồng hồ ELIO Nắng Xuân 40 mm Unisex EL032-01", "price": "219.000đ", "image": "static/images/product_1.jpg"},
+    {"id": 2, "name": "ELIO Nàng Thơ Unisex", "description": "Đồng hồ ELIO Nàng Thơ 40 mm Unisex EL030-01", "price": "219.000đ", "image": "static/images/product_2.jpg"},
+    {"id": 3, "name": "Đồng hồ Q&Q Nữ", "description": "Đồng hồ Q&Q 34 mm Nữ VQ86J029Y", "price": "290.000đ", "image": "static/images/product_3.jpg"},
+    {"id": 4, "name": "Đồng hồ ELIO Flower Nữ", "description": "Đồng hồ ELIO Flower 32 mm Nữ EL108-01", "price": "290.000đ", "image": "static/images/product_4.jpg"},
+    {"id": 5, "name": "Đồng hồ thông minh BeFit WatchFit", "description": "Đồng hồ thông minh BeFit WatchFit 46.7mm", "price": "640.000đ", "image": "static/images/product_5.jpg"},
+    {"id": 6, "name": "Đồng hồ thông minh BeFit Sporty", "description": "Đồng hồ thông minh BeFit Sporty 2 44.5mm Nâu", "price": "1.190.000đ", "image": "static/images/product_6.jpg"},
     
 ]
 
@@ -92,7 +96,7 @@ def add_to_cart(product_id):
     # Pass the product to the template
     return render_template("add_to_cart.html", product=product)
 
-@app.route('/add_to_cart')
+@app.route('/shopping_cart')
 def shopping_cart():
     # Your code here
     return render_template('shopping_cart.html')
@@ -137,7 +141,7 @@ def login():
 
     # User reached route via GET (as by clicking a link or via redirect)
     else:
-        return render_template("login.html")
+        return render_template("login.html", current_page='login')
 
 
 @app.route("/logout")
@@ -209,7 +213,7 @@ def register():
 
     # User reached route via GET (as by clicking a link or via redirect)
     else:
-        return render_template("register.html")
+        return render_template("register.html", current_page='register')
 
 
 @app.route("/facereg", methods=["GET", "POST"])
