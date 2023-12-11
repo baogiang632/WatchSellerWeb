@@ -89,7 +89,7 @@
                     {% for product in products %}
                     <div class="product">
                         <h3 class="product-name">{{ product.name }}</h3>
-                        <img src="{{ product.image }}" alt="{{ product.name }}" class="product-image">
+                        <img src="{{ product.image }}" alt="{{ product.image }}" class="product-image">
                         <p>{{ product.description }}</p>
                         <p>Price: {{ product.price }}</p>
                         <button class="add-to-cart" data-id="{{ product.id }}">Add to Cart</button>

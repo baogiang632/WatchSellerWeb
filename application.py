@@ -73,12 +73,12 @@ def home():
 @login_required
 def index():
     # Read data from the CSV file
-    with open('csvData/products.csv', newline='', encoding='utf-8') as csvfile:
+    with open('data/csv/products.csv', newline='', encoding='utf-8') as csvfile:
         reader = csv.DictReader(csvfile)
         products = list(reader)
 
     # Pass the product data to the template
-    return render_template("layout.html", products=products)
+    return render_template("layout.html", products = products)
 
 @app.route("/add_to_cart/<int:product_id>", methods=["GET", "POST"])
 @login_required
