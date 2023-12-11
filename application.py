@@ -61,13 +61,11 @@ Session(app)
 # Configure CS50 Library to use SQLite database
 db = SQL("sqlite:///data.db")
 
-
 @app.route("/")
 @login_required
 def home():
     # Pass a variable 'is_home' to the template
     return render_template('layout.html', is_home=True)
-
 
 @app.route("/home")
 @login_required
@@ -137,7 +135,6 @@ def login():
     else:
         return render_template("login.html", current_page='login')
 
-
 @app.route("/logout")
 def logout():
     """Log user out"""
@@ -148,11 +145,9 @@ def logout():
     # Redirect user to login form
     return redirect("/login")
 
-
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""
-
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
         # Assign inputs to variables
@@ -208,7 +203,6 @@ def register():
     # User reached route via GET (as by clicking a link or via redirect)
     else:
         return render_template("register.html", current_page='register')
-
 
 @app.route("/facereg", methods=["GET", "POST"])
 def facereg():
@@ -268,7 +262,6 @@ def facereg():
     else:
         return render_template("camera.html")
 
-
 @app.route("/facesetup", methods=["GET", "POST"])
 def facesetup():
     if request.method == "POST":
@@ -313,7 +306,6 @@ def errorhandler(e):
     if not isinstance(e, HTTPException):
         e = InternalServerError()
     return render_template("error.html", e=e)
-
 
 # Listen for errors
 for code in default_exceptions:
