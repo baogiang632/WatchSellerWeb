@@ -33,7 +33,7 @@
 </head>
 
 <body
-    style="font-family: 'Roboto', sans-serif; opacity: 1;background: -webkit-gradient(linear, left top, left bottom, from(white), to(#05ffde)) fixed;">
+    style="font-family: 'Roboto', sans-serif; opacity: 1; background: -webkit-gradient(linear, left top, left bottom, from(white), to(#05ffde)) fixed;">
 
     <div class="wrapper">
         <!-- Sidebar  -->
@@ -85,11 +85,10 @@
                 
 
                 <!-- Add this where you want the products to be displayed -->
-
                 <div class="product-grid">
                     {% for product in products %}
                     <div class="product">
-                        <h3>{{ product.name }}</h3>
+                        <h3 class="product-name">{{ product.name }}</h3>
                         <img src="{{ product.image }}" alt="{{ product.name }}" class="product-image">
                         <p>{{ product.description }}</p>
                         <p>Price: {{ product.price }}</p>

@@ -210,11 +210,10 @@ a.article:hover {
 
 .main-logo {
   position: absolute;
-  top: 0;
-  left: 87%;
-  transform: translate(-50%, 0) scale(0.3);
+  top: -65px;
+  left: 1390px;
+  transform: translate(-50%, 0) scale(0.2);
   text-align: center;
-  margin-top: 0;
   outline: 10px !important;
   border: none;
 }
@@ -232,14 +231,21 @@ a.article:hover {
   right: 0;
 }
 
-.product-grid {
-    display: grid;
+  .product-grid {
+    display: grid;    
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
+  }
+  .product {
+    margin: 30px auto 30px 50px;
   }
   .product-image {
     width: 210px;
     height: 210px;
+  }
+  .product-name {
+    color: #333;
+    font-size: 20px;
   }
   
   /* Icon logo */

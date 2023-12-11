@@ -28,6 +28,7 @@ from helpers import apology, login_required
 import requests
 from bs4 import BeautifulSoup
 from flask import abort
+import csv
 
 products = []
 
@@ -70,18 +71,26 @@ def home():
 
 @app.route("/home")
 @login_required
-def index():
-    # return render_template("index.html")
-    # Get the product data. This could come from a database, an API, etc.
-    products = [
-    {"id": 1, "name": "ELIO Nắng Xuân Unisex", "description": "Đồng hồ ELIO Nắng Xuân 40 mm Unisex EL032-01", "price": "219.000đ", "image": "static/images/product_1.jpg"},
-    {"id": 2, "name": "ELIO Nàng Thơ Unisex", "description": "Đồng hồ ELIO Nàng Thơ 40 mm Unisex EL030-01", "price": "219.000đ", "image": "static/images/product_2.jpg"},
-    {"id": 3, "name": "Đồng hồ Q&Q Nữ", "description": "Đồng hồ Q&Q 34 mm Nữ VQ86J029Y", "price": "290.000đ", "image": "static/images/product_3.jpg"},
-    {"id": 4, "name": "Đồng hồ ELIO Flower Nữ", "description": "Đồng hồ ELIO Flower 32 mm Nữ EL108-01", "price": "290.000đ", "image": "static/images/product_4.jpg"},
-    {"id": 5, "name": "Đồng hồ thông minh BeFit WatchFit", "description": "Đồng hồ thông minh BeFit WatchFit 46.7mm", "price": "640.000đ", "image": "static/images/product_5.jpg"},
-    {"id": 6, "name": "Đồng hồ thông minh BeFit Sporty", "description": "Đồng hồ thông minh BeFit Sporty 2 44.5mm Nâu", "price": "1.190.000đ", "image": "static/images/product_6.jpg"},
+# def index():
+#     # return render_template("index.html")
+#     # Get the product data. This could come from a database, an API, etc.
+#     products = [
+#     {"id": 1, "name": "ELIO Nắng Xuân Unisex", "description": "Đồng hồ ELIO Nắng Xuân 40 mm Unisex EL032-01", "price": "219.000đ", "image": "static/images/product_1.jpg"},
+#     {"id": 2, "name": "ELIO Nàng Thơ Unisex", "description": "Đồng hồ ELIO Nàng Thơ 40 mm Unisex EL030-01", "price": "219.000đ", "image": "static/images/product_2.jpg"},
+#     {"id": 3, "name": "Đồng hồ Q&Q Nữ", "description": "Đồng hồ Q&Q 34 mm Nữ VQ86J029Y", "price": "290.000đ", "image": "static/images/product_3.jpg"},
+#     {"id": 4, "name": "Đồng hồ ELIO Flower Nữ", "description": "Đồng hồ ELIO Flower 32 mm Nữ EL108-01", "price": "290.000đ", "image": "static/images/product_4.jpg"},
+#     {"id": 5, "name": "Đồng hồ thông minh BeFit WatchFit", "description": "Đồng hồ thông minh BeFit WatchFit 46.7mm", "price": "640.000đ", "image": "static/images/product_5.jpg"},
+#     {"id": 6, "name": "Đồng hồ thông minh BeFit Sporty", "description": "Đồng hồ thông minh BeFit Sporty 2 44.5mm Nâu", "price": "1.190.000đ", "image": "static/images/product_6.jpg"},
     
-]
+# ]
+
+#     # Pass the product data to the template
+#     return render_template("layout.html", products=products)
+def index():
+    # Read data from the CSV file
+    with open('CSVData/products.csv', newline='', encoding='utf-8') as csvfile:
+        reader = csv.DictReader(csvfile)
+        products = list(reader)
 
     # Pass the product data to the template
     return render_template("layout.html", products=products)
@@ -267,7 +276,7 @@ def facereg():
                 "SELECT * FROM users WHERE username = :username", username="swa"
             )
             session["user_id"] = username[0]["id"]
-            return redirect("/")
+            return redirect("/home")
         else:
             return render_template("camera.html", message=3)
 
