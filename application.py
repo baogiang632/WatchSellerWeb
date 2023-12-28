@@ -32,6 +32,22 @@ import csv
 
 products = []
 
+def get_product_by_id(id):
+    with open('data/csv/products.csv', 'r') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            if int(row['id']) == id:
+                return row
+    return None
+
+def get_products_by_ids(ids):
+    products = []
+    for id in ids:
+        product = get_product_by_id(id)
+        if product:
+            products.append(product)
+    return products
+
 # Configure application
 app = Flask(__name__)
 # configure flask-socketio
@@ -80,18 +96,24 @@ def index():
 
 @app.route("/add_to_cart/<int:product_id>", methods=["GET", "POST"])
 @login_required
-def add_to_cart(product_id):
-    # Find the product with the given id
-    product = next((product for product in products if product["id"] == product_id), None)
-    if product is None:
-        abort(404)  # If no product with the given id was found, return a 404 error
-    # Pass the product to the template
-    return render_template("add_to_cart.html", product=product)
+def add_to_cart():
+    product_id = request.form.get('product_id')
+    # Add the product to the cart. This will depend on how your cart is implemented.
+    # For example, you might add the product ID to the session:
+    if 'cart' not in session:
+        session['cart'] = []
+    session['cart'].append(product_id)
+    # Flash a message
+    flash('Product has been added to cart')
+    # Redirect to the shopping cart page
+    return redirect(url_for('shopping_cart'))
 
 @app.route('/shopping_cart')
 def shopping_cart():
-    # Your code here
-    return render_template('shopping_cart.html')
+    cart = session.get('cart', [])
+    # Get the product details from the database. This will depend on your database setup.
+    products_in_cart = get_products_by_ids(cart)
+    return render_template('shopping_cart.html', products=products_in_cart)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
