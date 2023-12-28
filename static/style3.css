@@ -235,9 +235,17 @@ a.article:hover {
     display: grid;    
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
+    /* background: #f0f0f0; 
+    border: 1px solid #000;  */
   }
   .product {
-    margin: 30px auto 30px 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 30px 190px;
+    background: #9fe1ae;
+    border: 1px solid #000;
   }
   .product-image {
     width: 210px;
